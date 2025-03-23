@@ -1,5 +1,5 @@
 ---@diagnostic disable: undefined-global
---_DEVELOP = true
+_DEVELOP = "../../hc3emu"
 if require and not QuickApp then require("hc3emu") end
 
  
@@ -8,7 +8,7 @@ if require and not QuickApp then require("hc3emu") end
 --%%type=com.fibaro.player
 --%%proxy=SonosProxy
 --%%uid=UPD896846032517895
---%%save=SonosQA.fqa
+--%%save=SonosPlayer.fqa
 
 --%%u={button="button_ID_10_1",text="Shuffle",onReleased="doShuffle"}
 --%%u={label="modesLabel",text="Modes:"}
