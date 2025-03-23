@@ -1,11 +1,14 @@
 ---@diagnostic disable: undefined-global
-_DEVELOP = true
+--_DEVELOP = true
 if require and not QuickApp then require("hc3emu") end
 
+ 
 -- Player type should handle actions: play, pause, stop, next, prev, setVolume, setMute
 --%%name=SonosPlayer
 --%%type=com.fibaro.player
 --%%proxy=SonosProxy
+--%%uid=UPD896846032517895
+--%%save=SonosQA.fqa
 
 --%%u={button="button_ID_10_1",text="Shuffle",onReleased="doShuffle"}
 --%%u={label="modesLabel",text="Modes:"}
@@ -20,7 +23,7 @@ if require and not QuickApp then require("hc3emu") end
 --%%u={multi="groupSelector",text="Group",onToggled="groupSelected",options={}}
 --%%u={button="groupBtn",text="Apply group",onReleased="applyGrouping"}
 
---%%file=lib/Sonos/SonosLib.lua:SonosLib
+--%%file=SonosLib.lua:SonosLib
 
 local player,sonos
 -- UI buttons - send command to Sonos
