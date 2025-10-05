@@ -38,7 +38,7 @@ of this license document, but changing it is not allowed.
 local TEST = false
 
 class 'Sonos'
-Sonos.VERSION = "0.89"
+Sonos.VERSION = "0.90"
 function Sonos:__init(IP,initcb,debugFlags)
   self.TIMEOUT = 30
   local colors = {'lightgreen','lightblue','yellow','orange','purple','pink','cyan','magenta','lime','red'}
@@ -198,7 +198,7 @@ function Sonos:__init(IP,initcb,debugFlags)
   end
 
   function eventMap.playerVolume(header,obj,color)
-    local player = SELF.groups[header.playerId] if not player then return end
+    local player = SELF.players[header.playerId] if not player then return end
     player.volume,player.muted=obj.volume,obj.muted post("playerVolume",player.id,{volume=obj.volume,muted=obj.muted},color)
   end
 
@@ -208,11 +208,6 @@ function Sonos:__init(IP,initcb,debugFlags)
     group.playModes = obj.playModes
     group.playModes._objectType = nil
     group.status = status post("playbackStatus",group.id,{status=status,modes=group.playModes},color)
-  end
-
-  function eventMap.playerVolume(header,obj,color)
-    local player = self._player[header.playerId]
-    player.volume = obj.volume post("playerVolume",player.id,{volume=obj.volume,muted=obj.muted},color)
   end
 
   function eventMap.metadataStatus(header,obj,color)
@@ -292,7 +287,7 @@ function Sonos:pause(playerName) doGroupCmd(self,playerName,"playback","pause") 
 function Sonos:skipToNextTrack(playerName) doGroupCmd(self,playerName,"playback","skipToNextTrack") end
 function Sonos:skipToPreviousTrack(playerName) doGroupCmd(self,playerName,"playback","skipToPreviousTrack") end
 function Sonos:volume(playerName,volume) doGroupCmd(self,playerName,"groupVolume","setVolume",{volume=volume}) end
-function Sonos:relativeVolume(playerName,delta) doGroupCmd(playerName,"groupVolume","setVolume",{volumeDelta=delta}) end
+function Sonos:relativeVolume(playerName,delta) doGroupCmd(self,playerName,"groupVolume","setVolume",{volumeDelta=delta}) end
 function Sonos:mute(playerName,state) doGroupCmd(self,playerName,"groupVolume","setMute",{muted=state~=false}) end
 function Sonos:togglePlayPause(playerName) doGroupCmd(self,playerName,"playback","togglePlayPause") end
 function Sonos:setModes(playerName,m)
