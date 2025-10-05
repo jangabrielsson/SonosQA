@@ -1,29 +1,26 @@
 ---@diagnostic disable: undefined-global
-_DEVELOP = "../../hc3emu"
-if require and not QuickApp then require("hc3emu") end
-
- 
 -- Player type should handle actions: play, pause, stop, next, prev, setVolume, setMute
---%%name=SonosPlayer
---%%type=com.fibaro.player
---%%proxy=SonosProxy
---%%uid=UPD896846032517895
---%%save=SonosPlayer.fqa
+--%%name:SonosPlayer
+--%%type:com.fibaro.player
+--%% proxy:SonosProxy
+--%%uid:UPD896846032517895
+--%%save:SonosPlayer.fqa
+--%%desktop:true
 
---%%u={button="button_ID_10_1",text="Shuffle",onReleased="doShuffle"}
---%%u={label="modesLabel",text="Modes:"}
---%%u={button="btnSay",text="Speak time",onReleased="speakTime"}
---%%u={label="statusLabel",text="Status:"}
---%%u={label="artistLabel",text="Artist"}
---%%u={label="trackLabel",text="Track"}
---%%u={label="playerLabel",text="Player"}
---%%u={select="playerSelector",text="Player",onToggled="selectPlayer",options={{text="a",value="a",type="option"}}}
---%%u={select="favoriteSelector",text="Favorite",onToggled="favoriteSelected",options={}}
---%%u={select="playlistSelector",text="Playlists",onToggled="playlistSelected",options={}}
---%%u={multi="groupSelector",text="Group",onToggled="groupSelected",options={}}
---%%u={button="groupBtn",text="Apply group",onReleased="applyGrouping"}
+--%%u:{button="button_ID_10_1",text="Shuffle",onReleased="doShuffle"}
+--%%u:{label="modesLabel",text="Modes:"}
+--%%u:{button="btnSay",text="Speak time",onReleased="speakTime"}
+--%%u:{label="statusLabel",text="Status:"}
+--%%u:{label="artistLabel",text="Artist"}
+--%%u:{label="trackLabel",text="Track"}
+--%%u:{label="playerLabel",text="Player"}
+--%%u:{select="playerSelector",text="Player",onToggled="selectPlayer",options={{text="a",value="a",type="option"}}}
+--%%u:{select="favoriteSelector",text="Favorite",onToggled="favoriteSelected",options={}}
+--%%u:{select="playlistSelector",text="Playlists",onToggled="playlistSelected",options={}}
+--%%u:{multi="groupSelector",text="Group",onToggled="groupSelected",options={}}
+--%%u:{button="groupBtn",text="Apply group",onReleased="applyGrouping"}
 
---%%file=SonosLib.lua:SonosLib
+--%%file:SonosLib.lua:SonosLib
 
 local player,sonos
 -- UI buttons - send command to Sonos
@@ -107,7 +104,7 @@ end
 function QuickApp:onInit()
     self:debug("Player")
     quickApp = self
-    Sonos("192.168.1.6",function(_sonos)
+    Sonos("192.168.1.5",function(_sonos)
       self:debug("Sonos Ready")
       sonos = _sonos
       function sonos:eventHandler(event)
