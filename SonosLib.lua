@@ -215,8 +215,10 @@ function Sonos:__init(IP,initcb,debugFlags)
     g.currentTrack = ""
     g.currentArtist = ""
     if obj.currentItem then
-      g.currentTrack =  obj.currentItem.track.name or ""
-      g.currentArtist = obj.currentItem.track.artist.name or ""
+      local track = obj.currentItem.track or {}
+      local artist = track.artist or {}
+      g.currentTrack = track.name or ""
+      g.currentArtist = artist.name or ""
     end
     g.currentMetadata = obj
     g.metadata = obj post("metadata",g.id,{track=g.currentTrack,artist=g.currentArtist},color)
