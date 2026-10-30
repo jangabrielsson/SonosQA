@@ -1,27 +1,14 @@
 ---@diagnostic disable: undefined-global
---%%name:SonosTest
---%% proxy:Strue
---%%var:ip="192.168.1.5"
---%%file:SonosLib.lua:SonosLib
+if require and not QuickApp then require("hc3emu") end
 
-function Sonos:eventHandler(event)
-  print(event) -- Just print out events, could be used to ex. update UI
-end
+--%%name:SonosTest
+-- -%%mode:proxy 
+--%%var:IP="192.168.50.5"
+--%%file:SonosLib.lua,SonosLib
+
+QuickApp.preloadSonos={ip="qvar:ip",debug={socket=true}}
 
 function QuickApp:onInit()
-   Sonos("192.168.1.5",function(sonos) -- Wait for SSnos to be setup
-      self:debug("Sonos Ready")
-   end)
+  self:debug("Player")
+  self.sonos:say("TV Room","Hello")
 end
-
--- Alt. hijack :onInit with QuickApp.preloadSonos
-
--- QuickApp.preloadSonos={ip="qvar:ip",debug={socket=true}}
-
--- function Sonos:eventHandler(event)
---   print(event) -- Just print out events, could be used to ex. update UI
--- end
-
--- function QuickApp:onInit()
---   self:debug("Player")
--- end

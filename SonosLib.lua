@@ -11,7 +11,7 @@ of this license document, but changing it is not allowed.
 --]]
 
 ---@diagnostic disable: undefined-global
---%%name=Sonos
+--%%name:Sonos
 
 ----- Sonos commands
 -- sonos:play(playerName)                  -- Start playing group that player belong to

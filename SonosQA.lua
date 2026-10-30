@@ -1,11 +1,12 @@
----@diagnostic disable: undefined-global
--- Player type should handle actions: play, pause, stop, next, prev, setVolume, setMute
+--[[
+     Player type should handle actions: play, pause, stop, next, prev, setVolume, setMute
+--]] 
 --%%name:SonosPlayer
 --%%type:com.fibaro.player
---%% proxy:SonosProxy
+-- -%%mode:proxy
 --%%uid:UPD896846032517895
---%%save:SonosPlayer.fqa
---%%desktop:true
+-- -%%save:SonosPlayer.fqa
+--%%var:IP="192.168.50.5"
 
 --%%u:{button="button_ID_10_1",text="Shuffle",onReleased="doShuffle"}
 --%%u:{label="modesLabel",text="Modes:"}
@@ -20,8 +21,9 @@
 --%%u:{multi="groupSelector",text="Group",onToggled="groupSelected",options={}}
 --%%u:{button="groupBtn",text="Apply group",onReleased="applyGrouping"}
 
---%%file:SonosLib.lua:SonosLib
+--%%file:SonosLib.lua,SonosLib
 
+Sonos = Sonos or {}
 local player,sonos
 -- UI buttons - send command to Sonos
 --fibaro.fibemu.dumpUIfromQA(1918)
@@ -104,7 +106,8 @@ end
 function QuickApp:onInit()
     self:debug("Player")
     quickApp = self
-    Sonos("192.168.1.5",function(_sonos)
+    local IP = self:getVariable("IP")
+    Sonos(IP,function(_sonos) -- Connecting to wss://192.168.1.5:1443/websocket/api
       self:debug("Sonos Ready")
       sonos = _sonos
       function sonos:eventHandler(event)
